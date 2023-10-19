@@ -69,7 +69,10 @@ class CSVDataLoader:
             i.columns = map(str.upper, i.columns)
             if 'FECHA' in i.columns:
                 i['FECHA'] = pd.to_datetime(i['FECHA'], format='%d/%m/%Y')
-
+    def get_nan_columns(self):
+        for i in self.data:
+            print(i)
+            print(self.data[i].isnull().sum())
     def get_cleaned_data(self):
         """
         Returns the cleaned CSV data as a dictionary.
@@ -88,3 +91,148 @@ if __name__ == "__main__":
     data_loader.clean_data()
     cleaned_data = data_loader.get_cleaned_data()
     print(cleaned_data)
+    print(data_loader.get_nan_columns())
+
+
+"""
+DireccionesVigentes_20231004.csv
+COD_VIA                    0
+VIA_CLASE                  0
+VIA_PAR                 3381
+VIA_NOMBRE                 0
+VIA_NOMBRE_ACENTOS         0
+CLASE_APP                  0
+NUMERO                     0
+CALIFICADOR           179040
+TIPO_NDP                   0
+COD_NDP                    0
+DISTRITO                   0
+BARRIO                     0
+COD_POSTAL                 0
+UTMX_ED                    0
+UTMY_ED                    0
+UTMX_ETRS                  0
+UTMY_ETRS                  0
+LATITUD                    0
+LONGITUD                   0
+ANGULO_ROTULACION          0
+dtype: int64
+RADARES FIJOS_vDTT.csv
+Nº\nRADAR               0
+Ubicacion               0
+Carretara o vial        1
+UBICACIÓN\nCalle 30     8
+PK                      1
+Sentido                 3
+Tipo                    3
+X (WGS84)              13
+Y (WGS84)              13
+Longitud                0
+Latitud                 0
+Coordenadas             0
+dtype: int64
+DireccionesEvolucionHistorica_20231004.csv
+COD_VIA                    0
+VIA_SQC               371584
+VIA_CLASE                  0
+VIA_PAR                17997
+VIA_NOMBRE                 0
+VIA_NOMBRE_ACENTOS         0
+COD_NDP                    0
+CLASE_NDP                  0
+NÚMERO                     0
+CALIFICADOR           322826
+FECHA_DE_ALTA              0
+FECHA_DE_BAJA         211657
+TIPO_NDP               16248
+UTMX_ED                    0
+UTMY_ED                    0
+UTMX_ETRS                  0
+UTMY_ETRS                  0
+LATITUD                    0
+LONGITUD                   0
+ANGULO_ROTULACION          0
+dtype: int64
+VialesVigentesDistritosBarrios_20231004.csv
+COD_VIA                  0
+VIA_CLASE                0
+VIA_PAR                601
+VIA_NOMBRE               0
+VIA_NOMBRE_ACENTOS       0
+DISTRITO                24
+BARRIO                  24
+IMPAR_MIN             2719
+IMPAR_MAX             2719
+PAR_MIN               2558
+PAR_MAX               2558
+dtype: int64
+Direcciones_vigentes2016.csv
+COD_VIA             0
+CLASE               0
+PARTICULA        3310
+NOMBRE              0
+CLASE_APP           0
+NUMERO_TX           0
+CALIFICADOR    178959
+TIPO_NDP          479
+COD_NDP             0
+DISTRITO            0
+UTMX_ETRS           0
+UTMY_ETRS           0
+dtype: int64
+VialesEvolucionHistorica_20231004.csv
+COD_VIA                  0
+VIA_SQC                  0
+VIA_CLASE                0
+VIA_PAR               1724
+VIA_NOMBRE               0
+VIA_NOMBRE_ACENTOS       0
+FECHA_DE_ALTA            0
+FECHA_DE_BAJA         9354
+VIA_ESTADO               0
+dtype: int64
+VialesVigentesDistritos_20231004.csv
+COD_VIA                  0
+VIA_CLASE                0
+VIA_PAR                601
+VIA_NOMBRE               0
+VIA_NOMBRE_ACENTOS       0
+DISTRITO                24
+IMPAR_MIN             2081
+IMPAR_MAX             2081
+PAR_MIN               1879
+PAR_MAX               1879
+dtype: int64
+Viales_vigentes2016.csv
+COD_VIA                  0
+VIA_CLASE                0
+VIA_PAR                272
+VIA_NOMBRE               0
+COD_VIA_COMIENZA         0
+CLASE_COMIENZA           0
+PARTICULA_COMIENZA     428
+VIA_NOMBRE_COMIENZA      0
+COD_VIA_TERMINA          0
+CLASE_TERMINA            0
+PARTICULA_TERMINA      791
+VIA_NOMBRE_TERMINA       0
+dtype: int64
+VialesVigentes_20231004.csv
+COD_VIA                      0
+VIA_CLASE                    0
+VIA_PAR                    402
+VIA_NOMBRE                   0
+VIA_NOMBRE_ACENTOS           0
+COD_VIA_COMIENZA             0
+CLASE_COMIENZA               0
+PARTICULA_COMIENZA         545
+NOMBRE_COMIENZA              0
+NOMBRE_ACENTOS_COMIENZA      0
+COD_VIA_TERMINA              0
+CLASE_TERMINA                0
+PARTICULA_TERMINA          917
+NOMBRE_TERMINA               0
+NOMBRE_ACENTOS_TERMINA       0
+dtype: int64
+None
+"""
