@@ -31,18 +31,20 @@ class CSVDataLoader:
         """
         Loads CSV data from the specified folder path into a dictionary.
 
-        Excludes certain datasets based on their file names.
-
         Returns:
         --------
         None
         """
         csv_files = [f for f in os.listdir(self.folder_path) if f.endswith('.csv')]
-        excluded_datasets = ['ActuacionesBomberos_2022.csv', 'ActuacionesBomberos_2023.csv', 'DatosEstacionesAbril023.csv', 'DatosEstacionesAgosto2022,csv', 'DatosEstacionesDiciembre2022.csv', 'DatosEstacionesEnero2023.csv', 'DatosEstacionesFebrero2023.csv', 'DatosEstacionesJulio2023.csv', 'DatosEstacionesJunio2023.csv', 'DatosEstacionesMarzo2023.csv', 'DatosEstacionesMayo2023.csv', 'DatosEstacionesNoviembre2022.csv', 'DatosEstacionesOctubre2022.csv', 'DatosEstacionesSeptiembre2022.csv']
+        folders = ("datasets/actuacionesBomberos", "datasets/estaciones", "datasets/accidentalidad")
+        for folder in folders:
+            df = pd.DataFrame()
+            for file in os.listdir(folder):
+                filepath = folder + "/" + file
+                df1 = pd.read_csv(filepath, sep=';', encoding='utf-8', low_memory=False)
+                df = pd.concat([df, df1])
+
         for file_name in csv_files:
-            if file_name in excluded_datasets:
-                print(f"Excluyendo {file_name}")
-                continue
             file_path = os.path.join(self.folder_path, file_name)
             try:
                 df = pd.read_csv(file_path, sep=';', encoding='latin-1', low_memory=False)
