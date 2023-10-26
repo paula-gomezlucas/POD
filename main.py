@@ -42,9 +42,7 @@ class CSVDataLoader:
                 filepath = folder + "/" + file
                 df1 = pd.read_csv(filepath, sep=';', encoding='utf-8', low_memory=False)
                 df = pd.concat([df, df1])
-            num_columnas = df.shape[1] - 1
-            columna_borrar = "Unnamed: " + str(num_columnas)
-            df = df.drop(columna_borrar, axis=1)
+            self.data[str(folder)] = df
 
         for file_name in csv_files:
             file_path = os.path.join(self.folder_path, file_name)
@@ -63,6 +61,15 @@ class CSVDataLoader:
         None
         """
         for i in self.data.values():
+            
+            num_columnas = i.shape[1] -1
+            columna_borrar = "Unnamed: " + str(num_columnas)
+
+            if columna_borrar in i.columns:
+                print("im sad")
+                i = i.drop(columna_borrar, axis=1)
+                i = i.dropna()
+            
             i = i.rename(columns = lambda x: x.strip().lower().replace(' ', '_'))
             i = i.map(lambda x: x.strip() if isinstance(x, str) else x)
             i = i.dropna()
@@ -71,13 +78,14 @@ class CSVDataLoader:
             i.columns = map(str.upper, i.columns)
             if 'FECHA' in i.columns:
                 i['FECHA'] = pd.to_datetime(i['FECHA'], format='%d/%m/%Y')
+            
+            print(i.isnull())
+
+
     def get_nan_columns(self):
         for i in self.data:
-            print(i)
-            print("aaaaaaaaaaaaaaa")
-            print(self.data[i].columns.values.tolist())
-            print("aaaaaaaaaaaaaaaaaa")
             print(self.data[i].isnull().sum())
+            print(self.data[i].info())
     def get_cleaned_data(self):
         """
         Returns the cleaned CSV data as a dictionary.
@@ -94,8 +102,6 @@ if __name__ == "__main__":
     data_loader = CSVDataLoader(folder_path)
     data_loader.load_data()
     data_loader.clean_data()
-    cleaned_data = data_loader.get_cleaned_data()
-    print(cleaned_data)
     print(data_loader.get_nan_columns())
 
 
