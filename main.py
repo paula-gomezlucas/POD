@@ -66,7 +66,6 @@ class CSVDataLoader:
             columna_borrar = "Unnamed: " + str(num_columnas)
 
             if columna_borrar in self.data[i].columns:
-                print("im sad")
                 self.data[i] = self.data[i].drop(columna_borrar, axis=1)
                 self.data[i] = self.data[i].dropna()
             
@@ -76,9 +75,12 @@ class CSVDataLoader:
             self.data[i] = self.data[i].drop_duplicates()
             self.data[i] = self.data[i].loc[:, ~self.data[i].columns.duplicated()]
             self.data[i].columns = map(str.upper, self.data[i].columns)
-            if 'FECHA' in self.data[i].columns:
-                self.data[i]['FECHA'] = pd.to_datetime(self.data[i]['FECHA'], format='%d/%m/%Y')
-
+            for fecha in self.data[i].columns:
+                if fecha.startswith("FECHA"):
+                    self.data[i][fecha] = pd.to_datetime(self.data[i][fecha], format='%d/%m/%Y')
+            num_cols = self.data[i].select_dtypes(include='number').columns
+            for col in num_cols:
+                self.data[i][col] = self.data[i][col].fillna(self.data[i][col].mean())
 
     def get_nan_columns(self):
         for i in self.data:
