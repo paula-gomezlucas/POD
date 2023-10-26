@@ -1,6 +1,5 @@
 import os
 import pandas as pd
-import pandas as pd
 
 class CSVDataLoader:
     """
@@ -38,11 +37,14 @@ class CSVDataLoader:
         csv_files = [f for f in os.listdir(self.folder_path) if f.endswith('.csv')]
         folders = ("datasets/actuacionesBomberos", "datasets/estaciones", "datasets/accidentalidad")
         for folder in folders:
-            df = pd.DataFrame()
+            df = None
             for file in os.listdir(folder):
                 filepath = folder + "/" + file
                 df1 = pd.read_csv(filepath, sep=';', encoding='utf-8', low_memory=False)
                 df = pd.concat([df, df1])
+            num_columnas = df.shape[1] - 1
+            columna_borrar = "Unnamed: " + str(num_columnas)
+            df = df.drop(columna_borrar, axis=1)
 
         for file_name in csv_files:
             file_path = os.path.join(self.folder_path, file_name)
@@ -72,6 +74,9 @@ class CSVDataLoader:
     def get_nan_columns(self):
         for i in self.data:
             print(i)
+            print("aaaaaaaaaaaaaaa")
+            print(self.data[i].columns.values.tolist())
+            print("aaaaaaaaaaaaaaaaaa")
             print(self.data[i].isnull().sum())
     def get_cleaned_data(self):
         """
