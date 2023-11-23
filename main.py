@@ -1,5 +1,7 @@
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.ticker import PercentFormatter
 
 class CSVDataLoader:
     """
@@ -96,6 +98,24 @@ class CSVDataLoader:
             A dictionary containing the cleaned CSV data, where the keys are the file names and the values are the corresponding dataframes.
         """
         return self.data
+    def create_graph(df, colummn, name):
+        frec = df[str(colummn)].value_counts()
+        aux_df = pd.DataFrame(frec)
+        aux_df.column = ["Frecuencia absoluta"]
+        aux_df["Frecuencia relativa"] = 100*aux_df["Frecuencia absoluta"] / len(df)
+        frec_rel_cumsum = aux_df["Frecuencia relativa"].cumsum()
+        aux_df["Frecuencia relativa acumulada"] = frec_rel_cumsum
+        fig = plt.figure()
+        ax = fig.add_subplot(1,1,1)
+        ax.set_title('Distribución de '+ str(name))
+        ax.bar(aux_df.index, aux_df['Frecuencia absoluta'], color='blue')
+        ax2 = ax.twinx()
+        ax2.plot(aux_df.index, aux_df['Frecuencia relativa acumulada'], color='red', marker='o', ms = 5)
+        ax2.yaxis.set_major_formatter(PercentFormatter())
+        ax.tick_params(axis='y', color = 'blue')
+        ax2.tick_params(axis='y', color = 'red')
+        ax.set_xticklabels(aux_df.index, rotation=90)
+        plt.show()
 
 if __name__ == "__main__":
     folder_path = "datasets"
