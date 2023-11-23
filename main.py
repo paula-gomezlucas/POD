@@ -99,9 +99,9 @@ class CSVDataLoader:
         """
         return self.data
     def create_graph(df, colummn, name):
-        frec = df[str(colummn)].value_counts()
+        frec = df[''+str(colummn)].value_counts()
         aux_df = pd.DataFrame(frec)
-        aux_df.column = ["Frecuencia absoluta"]
+        aux_df.columns = ["Frecuencia absoluta"]
         aux_df["Frecuencia relativa"] = 100*aux_df["Frecuencia absoluta"] / len(df)
         frec_rel_cumsum = aux_df["Frecuencia relativa"].cumsum()
         aux_df["Frecuencia relativa acumulada"] = frec_rel_cumsum
@@ -125,3 +125,4 @@ if __name__ == "__main__":
     data = data_loader.get_cleaned_data()
     print(data.values())
     data_loader.get_nan_columns()
+    CSVDataLoader.create_graph(data_loader.data['datasets/accidentalidad'], "DISTRITO", "Tipo de actuación")
