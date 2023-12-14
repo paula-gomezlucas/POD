@@ -1,0 +1,21 @@
+filomena
+festivos
+l-v hay más o menos en ciertas horas?
+
+puente de vallecas por qué tiene tantos accidentes????
+
+tipo de vehículo según relativos
+
+
+- limpieza:
+    - radares coordenadas manual
+    - accidentalidad: meteorologico segun porcentaje o segun mismo tiempo en el mismo rango de horas (mañana vs tarde)
+    - crear alguna columna de corralacion entre dos atributos
+
+- descriptivo:
+    - hacer iteracion de todos los datasets para los summary
+    - sacar boxplot/histograma de alguna variable relevante de cada dataset (otro grafico si es más descriptivo)
+
+- exploratorio:
+    - ir dataset a dataset 1 a 1 y usar los graficos previos para representar atributos relevantes, 
+    saltando logicamente de atributo en atributo
