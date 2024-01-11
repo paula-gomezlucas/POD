@@ -6,7 +6,6 @@ puente de vallecas por qué tiene tantos accidentes????
 
 tipo de vehículo según relativos
 
-
 - limpieza:
     - radares coordenadas manual
     - accidentalidad: meteorologico segun porcentaje o segun mismo tiempo en el mismo rango de horas (mañana vs tarde)
