@@ -7,11 +7,11 @@ puente de vallecas por qué tiene tantos accidentes????
 tipo de vehículo según relativos
 
 - limpieza:
-    - radares coordenadas manual
-    - accidentalidad: meteorologico segun porcentaje o segun mismo tiempo en el mismo rango de horas (mañana vs tarde)
-    - crear alguna columna de corralacion entre dos atributos
+    - radares coordenadas manual *
+    - accidentalidad: meteorologico segun porcentaje o segun mismo tiempo en el mismo rango de horas (mañana vs tarde) *
+    - crear alguna columna de corralacion entre dos atributos *
         - en accidentalidad crear columna que relacione tipo_persona con tipo_vehiculo y codigo_lesividad, usar esta proporcion
-        de correlacion para rellenar los datos de tipo_persona, tipo_vehiculo
+          de correlacion para rellenar los datos de tipo_persona, tipo_vehiculo
     - crear columna de tipo de día en accidentalidad (según el calendario: laboral, festivo, sabado, domingo)
 
 - descriptivo:
